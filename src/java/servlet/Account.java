@@ -51,7 +51,7 @@ public class Account extends HttpServlet
 //            }         
             if (pass1 == null || pass1.isEmpty() || pass2 == null || pass2.isEmpty()) {
                 erros.add("Password missing!");
-            }else if (pass1.length()< 6) {
+            }else if (pass1.length()< 8) {
                 erros.add("Password must contain at least 8 characters!");
             }else if (pass1.compareTo(pass2) != 0) {
                 erros.add("Passwords are different!");
