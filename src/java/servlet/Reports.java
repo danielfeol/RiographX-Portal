@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import util.DownloadObject;
 import util.Erro;
+import java.nio.file.Paths;
 
 @WebServlet(name = "Reports", urlPatterns = { "/reports.jsp" })
 public class Reports extends HttpServlet {
@@ -34,7 +36,8 @@ public class Reports extends HttpServlet {
             String filename = request.getParameter("filename");
             if (request.getParameter("filename") != null) {
 		PrintWriter out = response.getWriter();
-		  String filepath = "/opt/spark-data/reports/"; 
+		  String filepath = "/opt/spark-data/reports/";
+                  DownloadObject.downloadObject("xenon-sunspot-284701", "riographxstore", filename, Paths.get("/opt/spark-data/reports/"+filename));
 		  response.setContentType("application/pdf");
 		  response.setHeader("Content-Disposition","attachment; filename="+filename); 
 		  java.io.FileInputStream fileInputStream = new java.io.FileInputStream(filepath + filename);

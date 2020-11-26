@@ -28,27 +28,27 @@
         </thead>
 
         <tbody>
-        <c:forEach var="experiment" items="${resultadosUsuario}">
-            <tr>
-                <td><div class="center">${experiment.name}</div></td>
-                <td><div class="center">${experiment.start_datetime}</div></td>
-                <td><div class="center">${experiment.status}</div></td>
-                <td><div class="center">${experiment.elapsed}</div></td>
-                <td><div class="center">
+            <c:forEach var="experiment" items="${resultadosUsuario}">
+                <tr>
+                    <td><div class="center">${experiment.name}</div></td>
+                    <td><div class="center">${experiment.start_datetime}</div></td>
+                    <td><div class="center">${experiment.status}</div></td>
+                    <td><div class="center">${experiment.elapsed}</div></td>
+                    <td><div class="center">
                             <c:if test="${experiment.status=='FINISHED'}">
                                 <a href="Reports?filename=${experiment.submit}.pdf">Download</a>
                             </c:if>
-                </div></td>
-                <td><div class="center">
+                        </div></td>
+                    <td><div class="center">
                             <c:if test="${experiment.status=='FINISHED' or experiment.status=='ERROR'}">
                                 <form method="post" action="results.jsp">
                                     <input type="hidden" name="result" value="${experiment.result}"/>
                                     <input type="image" src="img/delete.png" class="input-result" name="bOK" value="submit" id="submit"/>
                                 </form>
                             </c:if>
-                    </div></td>
-            </tr>
-        </c:forEach>
+                        </div></td>
+                </tr>
+            </c:forEach>
         </tbody>
 
         <div class="clear"></div>
@@ -89,8 +89,8 @@
                 {"sWidth": "5%"}]
         }).fnSort([[0, 'desc']]);
     });
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
+    if (window.history.replaceState) {
+        window.history.replaceState(null, null, window.location.href);
     }
 </script>				
 

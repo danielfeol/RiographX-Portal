@@ -68,7 +68,7 @@ public class Account extends HttpServlet
                         final String senhaCripto = new_user.setSenhaWeb(pass1);
                         new_user.setSenha(senhaCripto);
                         dao.create(new_user);
-                String content = "Click on link to activate your account http://antares.eic.cefet-rj.br:8888/PortalRioGraphx/validation.jsp?pass=" + new_user.getToken();
+                String content = "Click on link to activate your account https://www.riographx.ga/validation.jsp?pass=" + new_user.getToken();
                 String resultMessage = "";
                 try {
                     EmailUtility.sendEmail(host, port, mailuser, pass, email, "Account validation on Portal Riographx",

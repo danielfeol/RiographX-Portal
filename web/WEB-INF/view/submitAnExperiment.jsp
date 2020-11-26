@@ -32,7 +32,7 @@
     </div>
 </c:if>
 <form method="post" name="formFunction" id="formFunction" action="submitAnExperiment.jsp" >
-    <div class="metade" style="height: 679px;">				
+    <div class="metade" style="height: 395px;">				
         <div class="titulo">Workflow Submission</div>
 
         <table>
@@ -55,8 +55,8 @@
                 </td>
             </tr>
             <tr>
-                <td>Minimum order <select style="width:40px; float: right;" type="text" name="ordermin" id="ordermin" size="1" /><option value=""><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></td>
-            <td>Maximum order <select style="width:40px; float: right;" type="text" name="ordermax" id="ordermax" size="1" /><option value=""><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option></select></td>
+                <td>Minimum order <select style="width:40px; float: right;" type="text" name="ordermin" id="ordermin" size="1" /><option value=""><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option></select></td>
+            <td>Maximum order <select style="width:40px; float: right;" type="text" name="ordermax" id="ordermax" size="1" /><option value=""><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option></select></td>
             </tr>
 
             <tr>
@@ -76,7 +76,7 @@
             </tr>
             <tr>
                 <td style="width:50%">Only generate connected graphs?</td>
-                <td><input style="float: right; width:15px" type="checkbox"  value="true" name="allowDiscGraphs" /></td>
+                <td><input style="float: right; width:15px" type="checkbox"  value="true" name="allowDiscGraphs" id="allowDiscGraphs" /></td>
             </tr>
             <tr>
                 <td style="width:50%">Only generate bipartite graphs?</td>
@@ -86,85 +86,15 @@
         <div class="clear"></div>
     </div>
 
-    <div class="metade" style="float: right;">
-        <div class="titulo">Function Parameters</div>
+    <div class="metade" style="height: 395px;">
+        <div class="titulo">processing statistics (in graph order)</div>
         <table>
+            <c:forEach var="experiment" items="${estatisticasPortal}">
             <tr  >
-                <td style="width:80%">Adjacency (&lambda;)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="adjacency1"  id="adjacency1" /></td>
+                <td style="width:70%">n = ${experiment.order}</td>
+                <td>${experiment.average} minutes</td>
             </tr>
-            <tr  >
-                <td >Laplacian (&mu;)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="laplacian" id="laplacian" /></td>
-            </tr>
-            <tr  >
-                <td>Signless Laplacian (q)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="slaplacian" id="slaplacian" /></td>
-            </tr>
-            <tr  >
-                <td>Distance (&rho;)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="distance" id="distance" /></td>
-            </tr>            
-            <tr  >
-                <td>Laplacian Distance (&gamma;)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="distslaplacian" id="distslaplacian" /></td>
-            </tr>            
-            <tr  >
-                <td>Signless Laplacian Distance (&alpha;)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="signdistslaplacian" id="signdistslaplacian" /></td>
-            </tr>
-            <tr  >
-                <td >Adjacency of the Complement (<SPAN STYLE="text-decoration:overline">&lambda;</SPAN>)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="adjacencyB"  id="adjacencyB" /></td>
-            </tr>
-            <tr  >
-                <td >Laplacian of the Complement (<SPAN STYLE="text-decoration:overline">&mu;</SPAN>)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="laplacianB" id="laplacianB" /></td>
-            </tr>
-            <tr  >
-                <td>Signless Laplacian of the Complement (<SPAN STYLE="text-decoration:overline">q</SPAN>)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="slaplacianB" id="slaplacianB" /></td>
-            </tr>
-            <tr  >
-                <td>Distance of the Complement (<SPAN STYLE="text-decoration:overline">&rho;</SPAN>)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="distanceB" id="distanceB" /></td>
-            </tr>
-            <tr  >
-                <td>Laplacian Distance of the Complement (<SPAN STYLE="text-decoration:overline">&gamma;</SPAN>)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="distslaplacianB" id="distslaplacianB" /></td>
-            </tr>            
-            <tr  >
-                <td>Signless Laplacian Distance of the Complement (<SPAN STYLE="text-decoration:overline">&alpha;</SPAN>)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="signdistslaplacianB" id="signdistslaplacianB" /></td>
-            </tr>
-            <tr  >
-                <td >Chromatic number (&chi;)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="chromatic"  id="chromatic" /></td>
-            </tr>
-            <tr  >
-                <td >Chromatic number of the Complement (<SPAN STYLE="text-decoration:overline">&chi;</SPAN>)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="chromaticB" id="chromaticB" /></td>
-            </tr>
-            <tr  >
-                <td>Clique number (&omega;)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="click" id="click" /></td>
-            </tr>
-            <tr  >
-                <td>Clique number of the Complement(<SPAN STYLE="text-decoration:overline">&omega;</SPAN>)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="clickB" id="clickB" /></td>
-            </tr>
-            <tr  >
-                <td>Degree (d)</td>
-                <td><input style="width:15px" type="checkbox" value="true"   name="largestDegree" id="largestDegree" /></td>
-            </tr>
-            <tr  >
-                <td>
-                    <!--                    Num of Edges.(M)-->
-                </td>
-                <td>
-                    <input style="width:15px" type="checkbox" value="true"   name="numEdxges" id="numEdges" />
-                </td>
-            </tr>
+            </c:forEach>           
         </table>
         <div class="clear"></div>
     </div>	
@@ -179,120 +109,60 @@
 
 </form>
 <script>
-
     function checkOptions(funct) {
 
-        $("#adjacency1").prop('checked', false);
-        $("#laplacian").prop('checked', false);
-        $("#slaplacian").prop('checked', false);
-        $("#distslaplacian").prop('checked', false);
-        $("#adjacencyB").prop('checked', false);
-        $("#laplacianB").prop('checked', false);
-        $("#slaplacianB").prop('checked', false);
-        $("#distslaplacianB").prop('checked', false);
-        $("#chromatic").prop('checked', false);
-        $("#chromaticB").prop('checked', false);
-        $("#click").prop('checked', false);
-        $("#clickB").prop('checked', false);
-        $("#largestDegree").prop('checked', false);
-        $("#numEdges").prop('checked', false);
+        $("#allowDiscGraphs").prop('checked', false);
 
 
-        if (funct.indexOf("overline{\\omega") > -1) {
-            $("#clickB").prop('checked', true);
-            funct = funct.replace('overline{\\omega', '');
-        }
 
-        if (funct.indexOf("overline{\\lambda") > -1) {
-            $("#adjacencyB").prop('checked', true);
-            funct = funct.replace('overline{\\lambda', '');
-        }
-
-        if (funct.indexOf("overline{\\mu") > -1) {
-            $("#laplacianB").prop('checked', true);
-            funct = funct.replace('overline{\\mu', '');
-        }
-
-        if (funct.indexOf("overline{q_") > -1) {
-            $("#slaplacianB").prop('checked', true);
-            funct = funct.replace('overline{q_', '');
-        }
         if (funct.indexOf("overline{\\alpha") > -1) {
-            $("#signdistslaplacianB").prop('checked', true);
+            $("#allowDiscGraphs").prop('checked', true);
             funct = funct.replace('overline{\\alpha', '');
         }
-        if (funct.indexOf("overline{\\gamma") > -1) {
-            $("#distslaplacianB").prop('checked', true);
-            funct = funct.replace('overline{\\gamma', '');
+        if (funct.indexOf("\\alpha") > -1) {
+            $("#allowDiscGraphs").prop('checked', true);
+            funct = funct.replace('\\alpha', '');
         }
         if (funct.indexOf("overline{\\rho") > -1) {
-            $("#distanceB").prop('checked', true);
+            $("#allowDiscGraphs").prop('checked', true);
             funct = funct.replace('overline{\\rho', '');
-        }        
-        if (funct.indexOf("\\omega") > -1) {
-            $("#click").prop('checked', true);
-            funct = funct.replace('omega', '');
-        }
-
-        if (funct.indexOf("\\chi") > -1) {
-            $("#chromatic").prop('checked', true);
-            funct = funct.replace('chi', '');
-        }
-
-        if (funct.indexOf("overline{\\chi") > -1) {
-            $("#chromaticB").prop('checked', true);
-            funct = funct.replace('overline{\\chi', '');
-        }
-
-        if (funct.indexOf("\\lambda") > -1) {
-            $("#adjacency1").prop('checked', true);
-            funct = funct.replace('lambda', '');
-        }
-
-        if (funct.indexOf("\\mu") > -1) {
-            $("#laplacian").prop('checked', true);
-            funct = funct.replace('mu', '');
-        }
-        if (funct.indexOf("\\alpha") > -1) {
-            $("#signdistslaplacian").prop('checked', true);
-            funct = funct.replace('alpha', '');
-        }
-        if (funct.indexOf("\\gamma") > -1) {
-            $("#distslaplacian").prop('checked', true);
-            funct = funct.replace('gamma', '');
         }
         if (funct.indexOf("\\rho") > -1) {
-            $("#distance").prop('checked', true);
-            funct = funct.replace('rho', '');
-        }        
-
-        if (funct.indexOf("q_") > -1) {
-            funct = funct + " ";
-            $("#slaplacian").prop('checked', true);
-            var indI = funct.indexOf("q_");
-            if (indI > -1) {
-                var indF = funct.indexOf(" ", indI);
-                var sgnlap = funct.substring(indI, indF);
-                //funct = funct.replace( sgnlap,'');
-            }
+            $("#allowDiscGraphs").prop('checked', true);
+            funct = funct.replace('\\rho', '');
         }
-
-        if (funct.indexOf("d_") > -1) {
-            funct = funct + " ";
-            $("#largestDegree").prop('checked', true);
-            var indI = funct.indexOf("d_");
-            if (indI > -1) {
-                var indF = funct.indexOf(" ", indI);
-                var largdeg = funct.substring(indI, indF);
-                //funct = funct.replace( largdeg,'');
-            }
+        if (funct.indexOf("overline{\\gamma") > -1) {
+            $("#allowDiscGraphs").prop('checked', true);
+            funct = funct.replace('overline{\\gamma', '');
         }
-
-
-        if (funct.indexOf("SIZE") > -1) {
-            $("#numEdges").prop('checked', true);
-            funct = funct.replace("SIZE", "");
+        if (funct.indexOf("\\gamma") > -1) {
+            $("#allowDiscGraphs").prop('checked', true);
+            funct = funct.replace('\\gamma', '');
         }
+        if (funct.indexOf("overline{E_D") > -1 || funct.indexOf("overline{E}_D") > -1) {
+            $("#allowDiscGraphs").prop('checked', true);
+            funct = funct.replace('overline{E_D', '');
+        }
+        if (funct.indexOf("E_D") > -1) {
+            $("#allowDiscGraphs").prop('checked', true);
+            funct = funct.replace('E_D', '');
+        }   
+        if (funct.indexOf("overline{LE_D") > -1 || funct.indexOf("overline{LE}_D") > -1) {
+            $("#allowDiscGraphs").prop('checked', true);
+            funct = funct.replace('overline{LE_D', '');
+        }
+        if (funct.indexOf("LE_D") > -1) {
+            $("#allowDiscGraphs").prop('checked', true);
+            funct = funct.replace('LE_D', '');
+        }  
+        if (funct.indexOf("overline{SLE_D") > -1 || funct.indexOf("overline{SLE}_D") > -1) {
+            $("#allowDiscGraphs").prop('checked', true);
+            funct = funct.replace('overline{SLE_D', '');
+        }
+        if (funct.indexOf("SLE_D") > -1) {
+            $("#allowDiscGraphs").prop('checked', true);
+            funct = funct.replace('SLE_D', '');
+        }          
 
     }
     function showFunctionImage() {

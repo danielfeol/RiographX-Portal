@@ -1,11 +1,17 @@
 package servlet;
 
+import dao.ResultsDAO;
 import dao.SubmitDAO;
+import entidades.Results;
 import entidades.Submit;
 import entidades.Usuario;
 import java.io.IOException;
 import static java.lang.Boolean.parseBoolean;
 import static java.lang.Integer.parseInt;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -108,12 +114,14 @@ public class Experiment extends HttpServlet
                 return;
             }
         }
+        final ResultsDAO dao = new ResultsDAO();
+        final List<Results> estatisticas = dao.getStatistics();
+        request.setAttribute("estatisticasPortal", estatisticas);
         request.setAttribute("mensagens", (Object)erros);
         final String URL = "/WEB-INF/view/submitAnExperiment.jsp";
         final RequestDispatcher rd = request.getRequestDispatcher(URL);
         rd.forward((ServletRequest)request, (ServletResponse)response);
-    }
-    
+    }   
     protected void doGet(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException {
         this.processRequest(request, response);
     }

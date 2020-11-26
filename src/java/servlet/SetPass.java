@@ -1,14 +1,13 @@
 package servlet;
 
 import dao.UsuarioDAO;
-import static dao.UsuarioDAO.md5Spring;
 import entidades.Usuario;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -23,6 +22,19 @@ import util.Erro;
 @WebServlet(name = "SetPass", urlPatterns = { "/setpass.jsp" })
 public class SetPass extends HttpServlet
 {
+    private String host;
+    private String port;
+    private String mailuser;
+    private String pass;
+    
+    public void init() {
+        // reads SMTP server setting from web.xml file
+        ServletContext context = getServletContext();
+        host = context.getInitParameter("host");
+        port = context.getInitParameter("port");
+        mailuser = context.getInitParameter("user");
+        pass = context.getInitParameter("pass");
+    }
     protected void processRequest(final HttpServletRequest request, final HttpServletResponse response) throws ServletException, IOException, SQLException {
         String URL = "/WEB-INF/view/setpass.jsp";
         final Erro erros = new Erro();
@@ -61,19 +73,19 @@ public class SetPass extends HttpServlet
                         if(dao.update(user)>0){
                             erros.add("Congratulations! Your password was successfully updated.");
                             URL = "/WEB-INF/view/login.jsp";
+                            String content = "Your password has been changed successfully.";
+                            String resultMessage;
+                            try {
+                                EmailUtility.sendEmail(host, port, mailuser, pass, email, "Password change on Portal Riographx",
+                                content);
+                                resultMessage = "The e-mail was sent successfully";
+                            } catch (Exception ex) {
+                                ex.printStackTrace();
+                                resultMessage = "There were an error: " + ex.getMessage();
+                            }
                         }else{
                             erros.add("Sorry! An unexpected error ocurred. Try again later.");
                         }
-//                String content = "Click on link to activate your account http://antares.eic.cefet-rj.br:8888/PortalRioGraphx/validation.jsp?pass=" + new_user.getToken();
-//                String resultMessage = "";
-//                try {
-//                    EmailUtility.sendEmail(host, port, mailuser, pass, email, "Account validation on Portal Riographx",
-//                    content);
-//                    resultMessage = "The e-mail was sent successfully";
-//                } catch (Exception ex) {
-//                    ex.printStackTrace();
-//                    resultMessage = "There were an error: " + ex.getMessage();
-//                }
                 }
                 else {
                     erros.add("User already exists!");

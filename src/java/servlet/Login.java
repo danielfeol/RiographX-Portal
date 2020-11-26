@@ -36,6 +36,10 @@ public class Login extends HttpServlet
                     final String senhaCripto = user.setSenhaWeb(senha);
                     if (user.getSenha().equalsIgnoreCase(senhaCripto)) {
                         request.getSession().setAttribute("usuarioLogado", user);
+                        dao.timeLogin(user);
+                        if (user.isAdministrador()){
+                            request.getSession().setAttribute("adminLogado", user);
+                        }
                         response.sendRedirect("results.jsp");
                         return;
                     }

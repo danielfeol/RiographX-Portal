@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app id="WebApp_ID" version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <display-name>Portal RioGraphx</display-name>
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+    <filter>
+        <filter-name>UsuarioLogado</filter-name>
+        <filter-class>filtro.UsuarioLogado</filter-class>
+    </filter>
+    <filter>
+        <filter-name>AdminLogado</filter-name>
+        <filter-class>filtro.AdminLogado</filter-class>
+    </filter>    
+    <filter-mapping>
+        <filter-name>UsuarioLogado</filter-name>
+        <url-pattern>/results.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>UsuarioLogado</filter-name>
+        <url-pattern>/submitAnExperiment.jsp</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AdminLogado</filter-name>
+        <url-pattern>/admin.jsp</url-pattern>
+    </filter-mapping>    
+    <filter-mapping>
+        <filter-name>AdminLogado</filter-name>
+        <url-pattern>/resultsAdmin.jsp</url-pattern>
+    </filter-mapping>
+    <servlet>
+        <servlet-name>Reports</servlet-name>
+        <servlet-class>servlet.Reports</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Reports</servlet-name>
+        <url-pattern>/Reports</url-pattern>
+    </servlet-mapping>   
+<!-- SMTP settings -->
+    <context-param>
+        <param-name>host</param-name>
+        <param-value>smtp.gmail.com</param-value>
+    </context-param>
+ 
+    <context-param>
+        <param-name>port</param-name>
+        <param-value>465</param-value>
+    </context-param>
+ 
+    <context-param>
+        <param-name>user</param-name>
+        <param-value></param-value>
+    </context-param>
+ 
+    <context-param>
+        <param-name>pass</param-name>
+        <param-value></param-value>
+    </context-param>    
+</web-app>

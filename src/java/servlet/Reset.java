@@ -49,7 +49,7 @@ public class Reset extends HttpServlet
                 if (user != null) {
                 user.setToken(md5Spring(login+LocalDateTime.now()));
                 dao.updateToken(user);
-                String content = "Click on link to change your account password http://antares.eic.cefet-rj.br:8888/PortalRioGraphx/setpass.jsp?pass=" + user.getToken();
+                String content = "Click on link to change your account password https://www.riographx.ga/setpass.jsp?pass=" + user.getToken();
                 String resultMessage;
                 try {
                     EmailUtility.sendEmail(host, port, mailuser, pass, login, "Password reset on Portal Riographx",
